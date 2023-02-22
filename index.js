@@ -8,26 +8,28 @@ server.post('/hook', async (req, res) => {
     // pega as informações necessárias
     const {message} = req.body
     const {from} = message
-
+    const texto = message.contents[0].text
     const mensagemResposta = {
         from: "stream-sweatshirt",
         to: from,
         contents: [
             {
                 type: "text",
-                text: "mensagem recebida!"
+                text: `mensagem recebida! ${texto}` 
             }
         ]
     }
 
-    // const resposta = await axios.post("https://api.zenvia.com/v2/channels/whatsapp/messages", mensagemResposta, {
-    //     headers: {
-    //         "X-API-TOKEN": process.env.ZEN_APIKEY
-    //     }
-    // }) 
+    const resposta = await axios.post("https://api.zenvia.com/v2/channels/whatsapp/messages", mensagemResposta, {
+        headers: {
+            "X-API-TOKEN": process.env.ZEN_APIKEY
+        }
+    }) 
+
+    console.log(`Ativado ${texto}`)
 
     // console.log(`Retorno ${resposta.data}`)
-    console.log(req.body.message)
+//    console.log(req.body.message)
     res.status(200).end()
 })
 
