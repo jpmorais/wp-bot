@@ -20,15 +20,15 @@ server.post('/hook', async (req, res) => {
         ]
     }
 
-    const resposta = await axios.post("https://api.zenvia.com/v2/channels/whatsapp/messages", mensagemResposta, {
-        headers: {
-            "X-API-TOKEN": process.env.ZEN_APIKEY
-        }
-    }) 
+    // const resposta = await axios.post("https://api.zenvia.com/v2/channels/whatsapp/messages", mensagemResposta, {
+    //     headers: {
+    //         "X-API-TOKEN": process.env.ZEN_APIKEY
+    //     }
+    // }) 
 
-    console.log(`Retorno ${retorno.data}`)
-    console.log(req.body)
-    res.send(req.body)
+    // console.log(`Retorno ${resposta.data}`)
+    console.log(req.body.message)
+    res.status(200).end()
 })
 
 const PORT = process.env.PORT || 5000
